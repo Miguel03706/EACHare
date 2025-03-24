@@ -1,4 +1,5 @@
 def printMenu():
+    print("\n")
     print("[1] Listar peers")
     print("[2] Obter peers")
     print("[3] Listar arquivos locais")
