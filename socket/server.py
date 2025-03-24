@@ -40,7 +40,7 @@ def handleClient(conn, addr):
         if (msg.startswith("MSG=")):
             msg_split = msg.split("=")
             msg_final = msg_split[1]
-            mensages.append(msg_final)
+            messages.append(msg_final)
             sendMessageToAll(msg_final)
 
             conections.append(msg_final)
