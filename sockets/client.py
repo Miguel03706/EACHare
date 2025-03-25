@@ -15,22 +15,12 @@ def handle_messages():
         msg = client.recv(1024).decode() # tamanho da msg q vai receber
         print(msg)
         
-
 def send():
-    msg = "HELLO"
+    msg = (f"{SERVER}:{PORT} 1 HELLO")
     client.send(msg.encode())
-
-# def send_message(msg):
-#    send("msg="+msg)
-
-# Envia quem é o autor da mensagem TODO: acho q nem vai precisar disso
-# def send_author():
-#    nome = input("Digite seu nome: ")
-#    send_message(nome)
-
-# def start_send():
-#     send_author()
-#    send_message("HELLO")
+    # ESTRUTURA CORRETA: <ORIGEM> <CLOCK> <TIPO>
+    # EX: 127.0.0.1:9002 1 HELLO
+    print(f"Encaminhando mensagem {msg} para {SERVER}:{PORT}")
 
 def start():
     thread1 = threading.Thread(target=handle_messages)
