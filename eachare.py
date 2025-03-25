@@ -54,7 +54,7 @@ def main():
         elif op == "2":
             getPeers()
         elif op == "3":
-            listLocalFiles()
+            listLocalFiles(shared_folder)
         elif op == "4":
             searchLocalFiles()
         elif op == "5":

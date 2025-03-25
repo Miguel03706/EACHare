@@ -17,6 +17,7 @@ def handle_messages():
         msg = client.recv(1024).decode() # tamanho da msg q vai receber
         print(msg)
         
+# envia msg para o servidor
 def send():
     msg = (f"{SERVER}:{PORT} 1 HELLO")
     client.send(msg.encode())

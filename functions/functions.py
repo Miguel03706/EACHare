@@ -10,10 +10,10 @@ def getPeers():
     print("Obter peers")
     # executar comando para obter peers
 
-def listLocalFiles():
+def listLocalFiles(archive):
     print("Listando arquivos locais")
     # executar comando para listar arquivos locais
-    pasta = os.path.join(os.path.dirname(__file__), "..", "shared")
+    pasta = os.path.join(os.path.dirname(__file__), "..", archive)
     for f in os.listdir(pasta):
         if os.path.isfile(os.path.join(pasta, f)):
             print(f)
@@ -29,7 +29,6 @@ def showStats():
 def changeChunkSize():
     print("Alterar tamanho do chunk")
     # executar comando para alterar tamanho do chunk
-
 
 # executa comando para sair
 def leave():
