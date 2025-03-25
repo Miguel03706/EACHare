@@ -13,27 +13,32 @@ from view.menu import (
 )
 
 from functions.read_neighbors import(
-    carregar_vizinhos
+    read_neighbors
 )
 
 
 def main():
     # Captura os argumentos da linha de comando
     # 192.168.1.2:5000 neighbors5000.txt shared  
+    # mudar o ip de acordo com seu ipv4 (entrar no cmd e digita: ipconfig) -> la da pra ver o ipv4
     if len(sys.argv) != 4:
-        print("Uso correto: python eachare.py <endereco>:<porta> <vizinhos.txt> <diretorio_compartilhado>")
+        print("Uso correto: python eachare.py <endereco>:<porta> <neighbors5000.txt> <shared>")
         sys.exit(1)
 
-    endereco_porta = sys.argv[1]
-    vizinhos_arquivo = sys.argv[2]
-    diretorio_compartilhado = sys.argv[3]
+    address_port = sys.argv[1]
+    archive_neighbors = sys.argv[2]
+    shared_folder = sys.argv[3]
 
-    print(f"Endereço e porta: {endereco_porta}")
-    print(f"Arquivo de vizinhos: {vizinhos_arquivo}")
-    print(f"Diretório compartilhado: {diretorio_compartilhado}")
+    print(f"Endereço e porta: {address_port}")
+    print(f"Arquivo de vizinhos: {archive_neighbors}")
+    print(f"Diretório compartilhado: {shared_folder}")
 
-    neighbors = carregar_vizinhos(vizinhos_arquivo)
+    neighbors = read_neighbors(archive_neighbors)
     print(neighbors)
+
+    # pelo o que eu entendi, agora a gente tem que pegar essas infos
+    # iniciar o servidor e o cliente com base nessas infos
+    # depois disso, basta fazer cada uma das funções
 
     while True:
         printMenu()
