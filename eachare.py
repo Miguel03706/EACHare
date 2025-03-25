@@ -12,6 +12,11 @@ from view.menu import (
     printMenu
 )
 
+from functions.read_neighbors import(
+    carregar_vizinhos
+)
+
+
 def main():
     # Captura os argumentos da linha de comando
     # 192.168.1.2:5000 neighbors5000.txt shared  
@@ -26,6 +31,9 @@ def main():
     print(f"Endereço e porta: {endereco_porta}")
     print(f"Arquivo de vizinhos: {vizinhos_arquivo}")
     print(f"Diretório compartilhado: {diretorio_compartilhado}")
+
+    neighbors = carregar_vizinhos(vizinhos_arquivo)
+    print(neighbors)
 
     while True:
         printMenu()
