@@ -56,4 +56,4 @@ def startServer():
         thread.start() # inicia a thread
         print(f"[Conexão] {addr} conectado")
 
-startServer()
+#startServer()
