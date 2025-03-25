@@ -2,6 +2,8 @@ import socket
 import threading
 import time
 
+
+# TODO: essas infos tem que vir dos parametros passados ao iniciar o código 
 PORT = 5000
 SERVER = "192.168.1.2"
 ADDR = (SERVER, PORT)
@@ -22,6 +24,8 @@ def send():
     # EX: 127.0.0.1:9002 1 HELLO
     print(f"Encaminhando mensagem {msg} para {SERVER}:{PORT}")
 
+# para cada cliente, uma thread diferente vai ser criada
+# TODO: dps aqui vai ter q ter um laço que cria essas threads eu acho
 def start():
     thread1 = threading.Thread(target=handle_messages)
     thread2 = threading.Thread(target=send)
