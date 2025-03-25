@@ -3,7 +3,7 @@ import threading
 import time
 
 PORT = 5000
-SERVER = "192.168.1.4"
+SERVER = "192.168.1.2"
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -12,12 +12,13 @@ client.connect(ADDR)
 # gerencia msg entre cliente e servidor
 def handle_messages():
     while True:
-        msg = client.recv(1024) # tamanho da msg q vai receber
+        msg = client.recv(1024).decode() # tamanho da msg q vai receber
         print(msg)
         
 
 def send():
-    client.send("HELLO")
+    msg = "HELLO"
+    client.send(msg.encode())
 
 # def send_message(msg):
 #    send("msg="+msg)

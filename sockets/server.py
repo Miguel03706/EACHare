@@ -27,7 +27,7 @@ def sendMessageToAll(msg):
 
 # Envia mensagem para todos os clientes conectados
 def handleClient(conn, addr):
-    print(f"[Nova conexão] Usuário: {addr} conectado. ")
+    print(f"[Nova conexão] Usuário: {addr} conectado. \n")
     print(f"[Conexão] : {conn}")
     global conections
     global messages
@@ -39,6 +39,7 @@ def handleClient(conn, addr):
         if not msg:
             print(f"[Desconectado] Usuário: {addr} desconectado.")
             break
+        print(f"[Mensagem] {addr}: {msg.decode()}")
         sendMessageToAll(msg)
         conections.append(msg)
 
