@@ -1,7 +1,5 @@
 import time
 import os
-from socket import (server) 
-from socket import (client) 
 
 
 def listPeers():

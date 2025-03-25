@@ -13,7 +13,7 @@ from view.menu import (
 )
 
 from functions.read_neighbors import(
-    read_neighbors
+    load_neighbors
 )
 
 
@@ -33,7 +33,7 @@ def main():
     print(f"Arquivo de vizinhos: {archive_neighbors}")
     print(f"Diretório compartilhado: {shared_folder}")
 
-    neighbors = read_neighbors(archive_neighbors)
+    neighbors = load_neighbors(archive_neighbors)
     print(neighbors)
 
     # pelo o que eu entendi, agora a gente tem que pegar essas infos
