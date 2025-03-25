@@ -16,8 +16,8 @@ from functions.read_neighbors import(
     load_neighbors
 )
 
-
-def main():
+def capturar_argumentos():
+    """ Captura e retorna os argumentos passados via terminal. """
     # Captura os argumentos da linha de comando
     # 192.168.1.2:5000 neighbors5000.txt shared  
     # mudar o ip de acordo com seu ipv4 (entrar no cmd e digita: ipconfig) -> la da pra ver o ipv4
@@ -32,6 +32,12 @@ def main():
     print(f"Endereço e porta: {address_port}")
     print(f"Arquivo de vizinhos: {archive_neighbors}")
     print(f"Diretório compartilhado: {shared_folder}")
+
+    return address_port, archive_neighbors, shared_folder
+
+def main():
+    # Captura os argumentos
+    address_port, archive_neighbors, shared_folder = capturar_argumentos()
 
     neighbors = load_neighbors(archive_neighbors)
     print(neighbors)

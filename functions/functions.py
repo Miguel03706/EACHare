@@ -31,7 +31,7 @@ def changeChunkSize():
     # executar comando para alterar tamanho do chunk
 
 
+# executa comando para sair
 def leave():
     print("Saindo...")
-    # executar comando para sair
     exit()
