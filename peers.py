@@ -1,5 +1,6 @@
 import socket
 import threading
+import time
 
 class P2P:
     def __init__(self, host, port):
@@ -15,6 +16,7 @@ class P2P:
         self.server_socket.bind((self.host, self.port))
         self.server_socket.listen(5)
         print(f"Servidor escutando em {self.host}:{self.port}...")
+
         while True:
             client, addr = self.server_socket.accept()
             print(f"Conexão estabelecida com {addr}")
@@ -23,6 +25,7 @@ class P2P:
 
     def handle_client(self, client_socket):
         """ Método para lidar com a comunicação do cliente conectado """
+
         while True:
             data = client_socket.recv(1024)
             if not data:
@@ -70,7 +73,6 @@ def run_p2p():
     threading.Thread(target=p2p.start_server, daemon=True).start()
 
     # Aguarde o servidor começar a escutar
-    import time
     time.sleep(1)  # Isso pode ser ajustado conforme necessário.
 
     # Conectando-se ao servidor (cliente)
