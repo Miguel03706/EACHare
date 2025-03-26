@@ -1,15 +1,16 @@
-import time
 import os
 
-
+# Miguel
 def listPeers():
     print("Listar peers")
     # executar comando para listar peers
 
+# Wesley
 def getPeers():
     print("Obter peers")
     # executar comando para obter peers
 
+# Finalizado
 def listLocalFiles(archive):
     print("Listando arquivos locais")
     # executar comando para listar arquivos locais
@@ -18,18 +19,22 @@ def listLocalFiles(archive):
         if os.path.isfile(os.path.join(pasta, f)):
             print(f)
 
+# Wesley
 def searchLocalFiles():
     print("Buscar arquivos locais")
     # executar comando para buscar arquivos locais
 
+# Miguel
 def showStats():
     print("Exibir estatísticas")
     # executar comando para exibir estatísticas
 
+# Wesley
 def changeChunkSize():
     print("Alterar tamanho do chunk")
     # executar comando para alterar tamanho do chunk
 
+# Finalizado
 # executa comando para sair
 def leave():
     print("Saindo...")
