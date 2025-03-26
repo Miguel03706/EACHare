@@ -8,6 +8,7 @@ from functions.functions import (
     changeChunkSize,
     leave
 )
+
 from view.menu import (
     printMenu
 )
