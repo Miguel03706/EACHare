@@ -32,10 +32,6 @@ def capturar_argumentos():
     archive_neighbors = sys.argv[2]
     shared_folder = sys.argv[3]
 
-    print(f"Endereço e porta: {address_port}")
-    print(f"Arquivo de vizinhos: {archive_neighbors}")
-    print(f"Diretório compartilhado: {shared_folder}")
-
     return address_port, archive_neighbors, shared_folder
 
 def main():
