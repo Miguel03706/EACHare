@@ -8,7 +8,7 @@ def load_neighbors(archive_neighbors):
                 linha = linha.strip()  # Remove espaços e quebras de linha
                 if linha:
                     endereco, porta = linha.split(":")  # Separa IP e porta
-                    neighbors.append((endereco, int(porta)))  # Converte porta para inteiro
+                    neighbors.append(f"{endereco}:{int(porta)}")  # Converte porta para inteiro
         print("Vizinhos carregados com sucesso!")
     except FileNotFoundError:
         print(f"Erro: Arquivo '{archive_neighbors}' não encontrado.")

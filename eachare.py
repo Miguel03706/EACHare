@@ -17,11 +17,13 @@ from functions.read_neighbors import(
     load_neighbors
 )
 
+from peers import (
+    run_p2p,
+    send_message
+)
+
 def capturar_argumentos():
     """ Captura e retorna os argumentos passados via terminal. """
-    # Captura os argumentos da linha de comando
-    # 192.168.1.2:5000 neighbors5000.txt shared  
-    # mudar o ip de acordo com seu ipv4 (entrar no cmd e digita: ipconfig) -> la da pra ver o ipv4
     if len(sys.argv) != 4:
         print("Uso correto: python eachare.py <endereco>:<porta> <neighbors5000.txt> <shared>")
         sys.exit(1)
@@ -37,15 +39,22 @@ def capturar_argumentos():
     return address_port, archive_neighbors, shared_folder
 
 def main():
-    # Captura os argumentos
+    # Utiliza os argumentos capturados
     address_port, archive_neighbors, shared_folder = capturar_argumentos()
 
-    neighbors = load_neighbors(archive_neighbors)
-    print(neighbors)
+    addres = address_port.split(":")[0]
+    port = int(address_port.split(":")[1])
+    peers = [] # talvez passar para o "peers.py"
 
-    # pelo o que eu entendi, agora a gente tem que pegar essas infos
-    # iniciar o servidor e o cliente com base nessas infos
-    # depois disso, basta fazer cada uma das funções
+    neighbors = load_neighbors(archive_neighbors)
+    # print(f"Vizinhos: {neighbors}")
+
+    # Iniciar cada peer vizinho em uma thread separada
+    for neighbor in neighbors:
+        neighbor_ip, neighbor_port = neighbor.split(":")
+        neighbor_port = int(neighbor_port)
+        run_p2p(neighbor_ip, neighbor_port)
+        peers.append((f"{neighbor_ip}:{neighbor_port}", "OFFLINE"))
 
     while True:
         printMenu()
