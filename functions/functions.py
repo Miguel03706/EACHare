@@ -1,9 +1,10 @@
 import os
 
+from view.listPeers import listAllPeers
+
 # Miguel
-def listPeers():
-    print("Listar peers")
-    # executar comando para listar peers
+def listPeers(peer_local, peers):
+    listAllPeers(peer_local, peers)
 
 # Wesley
 def getPeers():
