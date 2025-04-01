@@ -1,5 +1,10 @@
 from peers import (
-send_message, enviar_mensagem
+enviar_mensagem
+)
+
+from functions.clock import (
+    get_clock, 
+    update_clock
 )
     
 
@@ -21,5 +26,7 @@ def listAllPeers(peer_local, peers):
 
             enviar_mensagem(address_local, port_local, address_receptor, port_receptor, f"{peer_local[0][0]} 1 HELLO")
             print(f"Atualizando peer {peers[i][0]} status ONLINE")
+            update_clock(get_clock())
+            peers[i] = (peers[i][0], "ONLINE")
             break
     return
