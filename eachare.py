@@ -21,7 +21,6 @@ from functions.read_neighbors import(
 
 from peers import (
     run_p2p,
-    send_message
 )
 
 def capturar_argumentos():
@@ -66,7 +65,7 @@ def main():
         if op == "1":
             listPeers(peer_local, peers)
         elif op == "2":
-            getPeers()
+            getPeers(peer_local, peers)
         elif op == "3":
             listLocalFiles(shared_folder)
         elif op == "4":

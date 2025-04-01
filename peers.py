@@ -50,16 +50,6 @@ def run_p2p(host, port):
     
     # Aguarde o servidor começar a escutar
     time.sleep(0.2)
-    
-    # Conectando-se ao servidor (cliente)
-    # client_socket = connect_to_server(host, port)
-    
-    # Enviando uma mensagem
-    # send_message(client_socket, "Olá, peer!")
-    
-    # Fechando a conexão
-    # client_socket.close()
-    # print("Conexão fechada.")
 
 
 def enviar_mensagem(cliente_ip, cliente_porta, receptor_ip, receptor_porta, mensagem):
@@ -83,6 +73,8 @@ def enviar_mensagem(cliente_ip, cliente_porta, receptor_ip, receptor_porta, mens
                 print(f"Mensagem recebida: {resposta}")
         except BlockingIOError:
             pass
+
+        time.sleep(0.5)
 
     except Exception as e:
         print(f"Erro ao enviar mensagem: {e}")
