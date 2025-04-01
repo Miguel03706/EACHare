@@ -73,3 +73,4 @@ def enviar_mensagem(cliente_ip, cliente_porta, receptor_ip, receptor_porta, mens
         print(f"Erro ao enviar mensagem: {e}")
     finally:
         cliente_socket.close()
+        return

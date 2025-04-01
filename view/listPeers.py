@@ -22,4 +22,4 @@ def listAllPeers(peer_local, peers):
             enviar_mensagem(address_local, port_local, address_receptor, port_receptor, f"{peer_local[0][0]} 1 HELLO")
             print(f"Atualizando peer {peers[i][0]} status ONLINE")
             break
-    
+    return
