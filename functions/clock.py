@@ -1,3 +1,5 @@
+clock = 0
+
 def start_clock():
     global clock
     clock = 0

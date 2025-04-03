@@ -1,16 +1,14 @@
 import os
 
+from functions.clock import get_clock
 from peers import (
-enviar_mensagem
-)
-
-from functions.clock import (
-    get_clock, 
-    update_clock
+    send_message,
+    get_peers,
 )
 
 # Finalizado
-def listPeers(peer_local, peers):
+def listPeers(peer_local):
+    peers = get_peers()
     print ("\n Lista de peers:")
     print ("[0] voltar para o menu anterior")
     for i in range(len(peers)):
@@ -21,14 +19,9 @@ def listPeers(peer_local, peers):
         return
     for i in range(len(peers)):
         if op == str(i+1):
-            address_local = peer_local[0][0].split(":")[0]
-            port_local = int(peer_local[0][0].split(":")[1])
             address_receptor = peers[i][0].split(":")[0]
             port_receptor = int(peers[i][0].split(":")[1])
-
-            enviar_mensagem(address_local, port_local, address_receptor, port_receptor, f"{peer_local[0][0]} 1 HELLO")
-            print(f"Atualizando peer {peers[i][0]} status ONLINE")
-            update_clock(get_clock())
+            send_message(address_receptor, port_receptor, f"{peer_local[0][0]} {get_clock()} HELLO")
             peers[i] = (peers[i][0], "ONLINE")
             break
     return
@@ -36,24 +29,10 @@ def listPeers(peer_local, peers):
 # Wesley
 def getPeers(peer_local, peers):
     # executar comando para enviar mensagem para todos os peers conhecidos
-     update_clock(get_clock())
      """ ler os vizinhos dos peers atuais(se existir) e mandar msg para eles
          adicionando eles na lista de peers e atualizando o status deles
      """
-     for i in range(len(peers)):
-        address_local = peer_local[0][0].split(":")[0]
-        port_local = int(peer_local[0][0].split(":")[1])
-        address_receptor = peers[i][0].split(":")[0]
-        port_receptor = int(peers[i][0].split(":")[1])
-        try:
-            enviar_mensagem(address_local, port_local, address_receptor, port_receptor, f"{peer_local[0][0]} 2 GET_PEERS")
-            print(f"Atualizando peer {peers[i][0]} status ONLINE")
-            update_clock(get_clock())
-            peers[i] = (peers[i][0], "ONLINE")
-        except:
-            peers[i] = (peers[i][0], "OFFLINE")
-
-        break
+     pass
  
 
 # Finalizado
@@ -65,17 +44,17 @@ def listLocalFiles(archive):
         if os.path.isfile(os.path.join(pasta, f)):
             print(f)
 
-# Wesley
+# Não precisa fazer
 def searchLocalFiles():
     print("Buscar arquivos locais")
     # executar comando para buscar arquivos locais
 
-# Miguel
+# Não precisa fazer
 def showStats():
     print("Exibir estatísticas")
     # executar comando para exibir estatísticas
 
-# Wesley
+# Não precisa fazer
 def changeChunkSize():
     print("Alterar tamanho do chunk")
     # executar comando para alterar tamanho do chunk

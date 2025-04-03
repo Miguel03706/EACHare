@@ -21,6 +21,8 @@ from functions.read_neighbors import(
 
 from peers import (
     run_p2p,
+    add_peer,
+    get_peers,
 )
 
 def capturar_argumentos():
@@ -35,15 +37,13 @@ def capturar_argumentos():
 
     return address_port, archive_neighbors, shared_folder
 
-def iniciar_peers(neighbors, peers):        
+def iniciar_peers(neighbors):        
  # Iniciar cada peer vizinho em uma thread separada
     for neighbor in neighbors:
         neighbor_ip, neighbor_port = neighbor.split(":")
         neighbor_port = int(neighbor_port)
         run_p2p(neighbor_ip, neighbor_port)
-        peers.append((f"{neighbor_ip}:{neighbor_port}", "OFFLINE"))
-        print (f"Adicionado novo peer {neighbor_ip}:{neighbor_port} status OFFLINE")
-
+        add_peer(neighbor_ip, neighbor_port, "OFFLINE")
 
 def main():
     # Utiliza os argumentos capturados
@@ -51,21 +51,20 @@ def main():
 
     addres = address_port.split(":")[0]
     port = int(address_port.split(":")[1])
-    peers = [] # talvez passar para o "peers.py"
     neighbors = load_neighbors(archive_neighbors)
     peer_local = [(f"{addres}:{port}", "ONLINE")]
     run_p2p(addres, port)
 
-    iniciar_peers(neighbors, peers)
+    iniciar_peers(neighbors)
     # print(peers)
 
     while True:
         printMenu()
         op = input("Escolha uma opção: ")
         if op == "1":
-            listPeers(peer_local, peers)
+            listPeers(peer_local)
         elif op == "2":
-            getPeers(peer_local, peers)
+            getPeers(peer_local)
         elif op == "3":
             listLocalFiles(shared_folder)
         elif op == "4":
