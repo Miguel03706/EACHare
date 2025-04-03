@@ -48,6 +48,7 @@ def handle_client(client_socket):
         if not data:
             break
 
+        receptor_ip, receptor_port = client_socket.getsockname()
         msg = data.decode()
         parts = data.decode().split(" ")
         sender = parts[0]
@@ -58,15 +59,21 @@ def handle_client(client_socket):
             case "HELLO":
                 # Atualizar o status do peer para ONLINE
                 update_clock(get_clock())
-                print (f"Atualizando peer {sender} status ONLINE")
-                update_peer_status(sender.split(":")[0], sender.split(":")[1], "ONLINE")
+                update_peer_status(receptor_ip, receptor_port, "ONLINE")
                 print(f"Mensagem recebida: '{msg}'")
                 break
             case "GET_PEERS":
                 # preciso ver os peers conhecidos atualmente, e verificar se existe o arquivo txt
                 # neighbors500x.txt, se existir, adicionar os vizinhos na lista de peers
                 # e atualizar o status deles para ONLINE
-                update_clock(clock)
+                print(f"Resposta recebida: '{receptor_ip}:{receptor_port}'4? PEERLIST 1 ")
+                update_clock(get_clock())
+                break
+            case "PEERLIST":
+                # Atualizar o status do peer para ONLINE
+                update_clock(get_clock())
+                update_peer_status(receptor_ip, receptor_port, "ONLINE")
+                print(f"Mensagem recebida: '{msg}'")
                 break
             case _:
                 print(f"Mensagem recebida: {msg}")
@@ -100,4 +107,5 @@ def send_message(receptor_ip, receptor_porta, mensagem):
     except Exception as e:
         print(f"Erro ao enviar mensagem: {e}")
     finally:
+        time.sleep(0.5)
         cliente_socket.close()
