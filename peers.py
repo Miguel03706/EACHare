@@ -3,7 +3,6 @@ import threading
 import time
 
 from functions.clock import (
-    start_clock,
     update_clock,
     get_clock
 )
@@ -58,9 +57,9 @@ def handle_client(client_socket):
         match res_message:
             case "HELLO":
                 # Atualizar o status do peer para ONLINE
-                update_clock(get_clock())
                 update_peer_status(receptor_ip, receptor_port, "ONLINE")
                 print(f"Mensagem recebida: '{msg}'")
+                update_clock(get_clock())
                 break
             case "GET_PEERS":
                 # preciso ver os peers conhecidos atualmente, e verificar se existe o arquivo txt
@@ -69,13 +68,13 @@ def handle_client(client_socket):
                 update_clock(get_clock())
                 break
             case "PEERLIST":
-                # Atualizar o status do peer para ONLINE
-                update_clock(get_clock())
                 # retornar a lista de peers conhecidos com endereço:porta:status:0
                 print(f"Resposta recebida: '{receptor_ip}:{receptor_port} 4 PEER_LIST 1 127.0.0.1:9003:ONLINE:0'")
+                update_clock(get_clock())
                 break
             case _:
-                print(f"Mensagem recebida: {msg}")
+                print(f"Comando desconhecido")
+                print(f"Mensagem recebida: '{msg}'")
                 break
 
         # client_socket.send(b"Mensagem recebida")
@@ -90,9 +89,6 @@ def connect_to_server(server_ip, server_port):
 def run_p2p(host, port):
     # Iniciando o servidor em uma thread separada
     threading.Thread(target=start_server, args=(host, port), daemon=True).start()
-    
-
-
 
 def send_message(receptor_ip, receptor_porta, mensagem):
     try:
