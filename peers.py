@@ -65,15 +65,14 @@ def handle_client(client_socket):
             case "GET_PEERS":
                 # preciso ver os peers conhecidos atualmente, e verificar se existe o arquivo txt
                 # neighbors500x.txt, se existir, adicionar os vizinhos na lista de peers
-                # e atualizar o status deles para ONLINE
-                print(f"Resposta recebida: '{receptor_ip}:{receptor_port}'4? PEERLIST 1 ")
+
                 update_clock(get_clock())
                 break
             case "PEERLIST":
                 # Atualizar o status do peer para ONLINE
                 update_clock(get_clock())
-                update_peer_status(receptor_ip, receptor_port, "ONLINE")
-                print(f"Mensagem recebida: '{msg}'")
+                # retornar a lista de peers conhecidos com endereço:porta:status:0
+                print(f"Resposta recebida: '{receptor_ip}:{receptor_port} 4 PEER_LIST 1 127.0.0.1:9003:ONLINE:0'")
                 break
             case _:
                 print(f"Mensagem recebida: {msg}")
