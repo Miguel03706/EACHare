@@ -31,13 +31,14 @@ def listPeers(peer_local):
 # adicionando eles na lista de peers e atualizando o status deles
 # add tbm no arquivo de vizinhos inicial
 def getPeers(peer_local):
-    peers = get_peers()
-    for i in range(len(peers)):
-        address_receptor = peers[i][0].split(":")[0]
-        port_receptor = int(peers[i][0].split(":")[1])
-        send_message(address_receptor, port_receptor, f"{peer_local[0][0]} {get_clock()} GET_PEERS")
-        break
+    peers = get_peers()  
+    for peer in peers:
+        ip, port_str = peer[0].split(":")
+        port = int(port_str)
+        message = f"{peer_local[0][0]} {get_clock()} GET_PEERS"
+        send_message(ip, port, message)
     return
+
  
 
 # Finalizado

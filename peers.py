@@ -21,6 +21,7 @@ def get_peers():
     global peers
     return peers 
 
+
 def update_peer_status(peer_ip, peer_port, status):
     global peers
     peer = (f"{peer_ip}:{peer_port}", status)
