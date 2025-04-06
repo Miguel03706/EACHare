@@ -42,7 +42,7 @@ def iniciar_peers(neighbors):
     for neighbor in neighbors:
         neighbor_ip, neighbor_port = neighbor.split(":")
         neighbor_port = int(neighbor_port)
-        run_p2p(neighbor_ip, neighbor_port)
+        # run_p2p(neighbor_ip, neighbor_port)
         add_peer(neighbor_ip, neighbor_port, "OFFLINE")
 
 def main():

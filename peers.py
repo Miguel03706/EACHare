@@ -50,36 +50,44 @@ def handle_client(client_socket):
 
         receptor_ip, receptor_port = client_socket.getsockname()
         msg = data.decode()
-        parts = data.decode().split(" ")
+        parts = msg.split(" ")
         sender = parts[0]
-        clock = parts[1]
+        clock_value = parts[1]
         res_message = parts[2]
 
         match res_message:
             case "HELLO":
-                # Atualizar o status do peer para ONLINE
                 update_peer_status(receptor_ip, receptor_port, "ONLINE")
                 print(f"Mensagem recebida: '{msg}'")
                 update_clock(get_clock())
                 break
             case "GET_PEERS":
-                # preciso ver os peers conhecidos atualmente, e verificar se existe o arquivo txt
-                # neighbors500x.txt, se existir, adicionar os vizinhos na lista de peers
-
+                # Atualiza o relógio
                 update_clock(get_clock())
+                # Obtém a lista de peers conhecidos e exclui o remetente
+                current_peers = get_peers()
+                response_peers = []
+                for p in current_peers:
+                    if p[0] != sender:
+                        # Formata: <endereço>:<porta>:<status>:0
+                        response_peers.append(f"{p[0]}:{p[1]}:0")
+                num_peers = len(response_peers)
+                # Origem: o peer local (obtido via receptor_ip e receptor_port)
+                origin = f"{receptor_ip}:{receptor_port}"
+                response_message = f"{origin} {get_clock()} PEER_LIST {num_peers} " + " ".join(response_peers) + "\n"
+                client_socket.send(response_message.encode())
                 break
-            case "PEERLIST":
-                # retornar a lista de peers conhecidos com endereço:porta:status:0
-                print(f"Resposta recebida: '{receptor_ip}:{receptor_port} 4 PEER_LIST 1 127.0.0.1:9003:ONLINE:0'")
+            case "PEER_LIST":
+                # Essa mensagem pode ser processada no lado que enviou o GET_PEERS
+                print(f"Resposta recebida: '{msg}'")
                 update_clock(get_clock())
                 break
             case _:
                 print(f"Comando desconhecido")
                 print(f"Mensagem recebida: '{msg}'")
                 break
-
-        # client_socket.send(b"Mensagem recebida")
     client_socket.close()
+
 
 """ Conecta-se a outro peer """
 def connect_to_server(server_ip, server_port):
